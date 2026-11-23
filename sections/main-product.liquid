@@ -1,0 +1,117 @@
+{%- assign current_variant = product.selected_or_first_available_variant -%}
+
+<section class="sv-section" data-pdp-scope style="padding-block: 72px;">
+  <div class="sv-container">
+    <div class="sv-pdp-split">
+      <div style="display: flex; flex-direction: column; gap: 24px;">
+        {%- if product.media.size > 0 -%}
+          <div class="sv-product-card__frame" style="height: 520px;">
+            <div class="sv-product-card__top">
+              <span class="sv-badge">{{ product.metafields.seravolt.edition_badge.value | default: product.type | default: 'CORE CHASSIS' }}</span>
+              <span class="sv-mono sv-muted">{{ current_variant.sku | default: 'EDITION 01' }}</span>
+            </div>
+            <div class="sv-product-card__media">
+              {{
+                product.featured_media
+                | image_url: width: 1200
+                | image_tag:
+                  class: 'sv-product-card__img',
+                  style: 'max-height: 390px;',
+                  fetchpriority: 'high',
+                  alt: product.featured_media.alt | default: product.title
+              }}
+            </div>
+          </div>
+        {%- endif -%}
+
+        {% render 'modular-mode-switcher', id_suffix: 'pdp' %}
+      </div>
+
+      <div class="sv-pdp-details">
+        <p class="sv-mono sv-muted">
+          {{ product.metafields.seravolt.metadata.value | default: current_variant.sku | default: 'SERAVOLT EDITION 01' }}
+        </p>
+        <h1 class="sv-section-title">{{ product.title }}</h1>
+        <p class="sv-product-code" data-product-price>{{ current_variant.price | money_with_currency }}</p>
+
+        {%- if product.description != blank -%}
+          <div class="sv-body sv-muted">{{ product.description }}</div>
+        {%- endif -%}
+
+        {%- unless product.has_only_default_variant -%}
+          <sv-variant-picker>
+            <p class="sv-mono sv-muted" style="margin-bottom: 10px;">LEATHER &amp; FINISH</p>
+            <div class="sv-swatches" role="radiogroup" aria-label="Select variant">
+              {%- for variant in product.variants -%}
+                <button
+                  type="button"
+                  class="sv-swatch-btn {% if variant.id == current_variant.id %}is-active{% endif %}"
+                  role="radio"
+                  aria-checked="{% if variant.id == current_variant.id %}true{% else %}false{% endif %}"
+                  data-variant-id="{{ variant.id }}"
+                  data-formatted-price="{{ variant.price | money_with_currency | escape }}"
+                >
+                  <span class="sv-swatch-dot" style="background: {{ variant.metafields.seravolt.swatch.value | default: '#141413' }};"></span>
+                  {{ variant.title }}
+                </button>
+              {%- endfor -%}
+            </div>
+            <script type="application/json">{{ product.variants | json }}</script>
+          </sv-variant-picker>
+        {%- endunless -%}
+
+        <div class="sv-dimensions-box">
+          <span class="sv-mono sv-muted">{{ 'products.dimensions' | t }}</span>
+          <span class="sv-mono">{{ product.metafields.seravolt.dimensions.value | default: '380 × 290 × 125 mm' }}</span>
+        </div>
+
+        <sv-product-form>
+          {%- form 'product', product, novalidate: 'novalidate' -%}
+            <input type="hidden" name="id" value="{{ current_variant.id }}">
+            <button
+              type="submit"
+              class="sv-btn sv-btn--full"
+              data-adding-label="{{ 'products.adding' | t }}"
+              {% unless current_variant.available %}disabled{% endunless %}
+            >
+              {%- if current_variant.available -%}
+                {{ 'products.add_to_bag' | t }}
+              {%- else -%}
+                {{ 'products.sold_out' | t }}
+              {%- endif -%}
+            </button>
+          {%- endform -%}
+          <p class="sv-mono sv-brass" data-form-status role="status" aria-live="polite" style="margin-top: 8px;"></p>
+        </sv-product-form>
+
+        <div style="padding-top: 12px;">
+          <details class="sv-accordion" open>
+            <summary class="sv-mono"><span>MODULAR ENGINEERING</span><span class="sv-accordion__icon">+</span></summary>
+            <div class="sv-accordion__content sv-body">
+              {{ product.metafields.seravolt.engineering_notes.value | default: 'Fitted with concealed CNC-milled Brushed Volt Brass magnetic detent lock points (±0.15 mm tolerance) for tool-free modular reconfiguration.' }}
+            </div>
+          </details>
+          <details class="sv-accordion">
+            <summary class="sv-mono"><span>SPECIFICATIONS</span><span class="sv-accordion__icon">+</span></summary>
+            <div class="sv-accordion__content sv-body">
+              {{ product.metafields.seravolt.specification.value | default: 'Full-grain Italian box calfskin · Solid brushed brass lock hardware · Organic cotton twill archive lining.' }}
+            </div>
+          </details>
+          <details class="sv-accordion">
+            <summary class="sv-mono"><span>LEATHER &amp; HARDWARE CARE</span><span class="sv-accordion__icon">+</span></summary>
+            <div class="sv-accordion__content sv-body">
+              {{ product.metafields.seravolt.care.value | default: 'Wipe with a dry unbleached cotton cloth. Condition annually with neutral beeswax balm. Registered serials include lifetime brass clasp servicing.' }}
+            </div>
+          </details>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Main Product",
+  "settings": []
+}
+{% endschema %}

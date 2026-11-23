@@ -1,0 +1,46 @@
+<section class="sv-section" aria-labelledby="CollectionsArch-{{ section.id }}">
+  <div class="sv-container">
+    <div class="sv-band-header" data-sv-reveal>
+      <div>
+        <p class="sv-mono sv-muted" style="margin-bottom: 10px;">{{ section.settings.eyebrow }}</p>
+        <h2 class="sv-section-title" id="CollectionsArch-{{ section.id }}">{{ section.settings.heading }}</h2>
+      </div>
+      <a href="{{ routes.collections_url }}" class="sv-link-arrow">VIEW ALL COLLECTIONS →</a>
+    </div>
+
+    <div class="sv-collections-split">
+      <a href="{{ section.settings.chassis_url | default: '/collections/the-chassis-line' }}" class="sv-collection-card sv-collection-card--light" data-sv-reveal>
+        <p class="sv-mono sv-muted">{{ section.settings.chassis_eyebrow }}</p>
+        <h3 class="sv-section-title">{{ section.settings.chassis_title }}</h3>
+        <p class="sv-body sv-muted">{{ section.settings.chassis_desc }}</p>
+        <span class="sv-link-arrow" style="margin-top: auto;">ENTER THE CHASSIS LINE →</span>
+      </a>
+
+      <a href="{{ section.settings.module_url | default: '/collections/the-module-atelier' }}" class="sv-collection-card sv-collection-card--dark" data-sv-reveal>
+        <p class="sv-mono sv-brass">{{ section.settings.module_eyebrow }}</p>
+        <h3 class="sv-section-title">{{ section.settings.module_title }}</h3>
+        <p class="sv-body" style="color: rgba(255,255,255,0.75);">{{ section.settings.module_desc }}</p>
+        <span class="sv-link-arrow sv-brass" style="margin-top: auto;">ENTER THE MODULE ATELIER →</span>
+      </a>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "03 Collections System",
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "02 / TWO INTERLOCKING LINES" },
+    { "type": "text", "id": "heading", "label": "Heading", "default": "Built as a System." },
+    { "type": "text", "id": "chassis_eyebrow", "label": "Card 1 Eyebrow", "default": "COLLECTION 01 · 03 CHASSIS" },
+    { "type": "text", "id": "chassis_title", "label": "Card 1 Title", "default": "The Chassis Line" },
+    { "type": "textarea", "id": "chassis_desc", "label": "Card 1 Description", "default": "Reinforced Tuscan box calfskin bodies engineered with 3 to 4 concealed brass lock ports: Monolith Tote, Axis Crossbody, and Chamber Bucket." },
+    { "type": "url", "id": "chassis_url", "label": "Card 1 URL" },
+    { "type": "text", "id": "module_eyebrow", "label": "Card 2 Eyebrow", "default": "COLLECTION 02 · 03 MODULES" },
+    { "type": "text", "id": "module_title", "label": "Card 2 Title", "default": "The Module Atelier" },
+    { "type": "textarea", "id": "module_desc", "label": "Card 2 Description", "default": "Interchangeable magnetic components—Folio Clutch, 40mm Architect Strap, and Volt Nano Pod—designed to click seamlessly onto every SERAVOLT chassis." },
+    { "type": "url", "id": "module_url", "label": "Card 2 URL" }
+  ],
+  "presets": [{ "name": "03 Collections System" }]
+}
+{% endschema %}

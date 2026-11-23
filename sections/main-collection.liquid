@@ -1,0 +1,64 @@
+{%- assign is_dark_header = false -%}
+{%- if collection.handle == 'the-module-atelier' -%}
+  {%- assign is_dark_header = true -%}
+{%- endif -%}
+
+<section class="sv-section {% if is_dark_header %}sv-section--dark{% else %}sv-section--warm{% endif %}" style="padding-block: 64px;">
+  <div class="sv-container">
+    <p class="sv-mono {% unless is_dark_header %}sv-muted{% endunless %}" style="margin-bottom: 24px;">
+      <a href="{{ routes.root_url }}">HOME</a>  /  {{ collection.title | upcase }}
+    </p>
+    <div class="sv-band-header" style="margin-bottom: 0;">
+      <div>
+        <p class="sv-mono {% if is_dark_header %}sv-brass{% else %}sv-muted{% endif %}" style="margin-bottom: 10px;">
+          EDITION 01 CATALOGUE  ·  {{ collection.products_count }} INTERLOCKING OBJECTS
+        </p>
+        <h1 class="sv-display-serif">{{ collection.title }}</h1>
+        {%- if collection.description != blank -%}
+          <p class="sv-editorial-lead {% unless is_dark_header %}sv-muted{% endunless %}" style="max-width: 680px; margin-top: 16px;">
+            {{ collection.description | strip_html }}
+          </p>
+        {%- endif -%}
+      </div>
+
+      <nav class="sv-header__nav" aria-label="Collection Lines">
+        <a href="{{ routes.all_products_collection_url }}" class="sv-link-arrow">ALL</a>
+        <a href="/collections/the-chassis-line" class="sv-link-arrow">THE CHASSIS LINE</a>
+        <a href="/collections/the-module-atelier" class="sv-link-arrow">THE MODULE ATELIER</a>
+      </nav>
+    </div>
+  </div>
+</section>
+
+<section class="sv-section">
+  <div class="sv-container">
+    {%- paginate collection.products by 12 -%}
+      <div class="sv-product-grid">
+        {%- for product in collection.products -%}
+          {% render 'modular-product-card', product: product %}
+        {%- else -%}
+          <p class="sv-editorial-lead sv-muted">No objects found in this line yet.</p>
+        {%- endfor -%}
+      </div>
+
+      {%- if paginate.pages > 1 -%}
+        <nav style="margin-top: 56px; display: flex; gap: 20px; justify-content: center;" aria-label="Pagination">
+          {%- if paginate.previous -%}
+            <a href="{{ paginate.previous.url }}" class="sv-link-arrow">← PREVIOUS</a>
+          {%- endif -%}
+          <span class="sv-mono sv-muted">PAGE {{ paginate.current_page }} OF {{ paginate.pages }}</span>
+          {%- if paginate.next -%}
+            <a href="{{ paginate.next.url }}" class="sv-link-arrow">NEXT →</a>
+          {%- endif -%}
+        </nav>
+      {%- endif -%}
+    {%- endpaginate -%}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Main Collection",
+  "settings": []
+}
+{% endschema %}

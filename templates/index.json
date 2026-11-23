@@ -1,0 +1,26 @@
+{
+  "sections": {
+    "hero": {
+      "type": "hero-modular",
+      "settings": {}
+    },
+    "engineering": {
+      "type": "engineering-band",
+      "settings": {}
+    },
+    "collections_system": {
+      "type": "collections-architecture",
+      "settings": {}
+    },
+    "catalogue": {
+      "type": "featured-catalogue",
+      "settings": {}
+    }
+  },
+  "order": [
+    "hero",
+    "engineering",
+    "collections_system",
+    "catalogue"
+  ]
+}

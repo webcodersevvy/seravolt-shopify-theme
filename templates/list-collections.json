@@ -1,0 +1,11 @@
+{
+  "sections": {
+    "overview": {
+      "type": "collections-overview",
+      "settings": {}
+    }
+  },
+  "order": [
+    "overview"
+  ]
+}

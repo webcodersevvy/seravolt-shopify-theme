@@ -1,0 +1,45 @@
+{
+  "general": {
+    "accessibility": {
+      "skip_to_content": "Skip to content",
+      "close": "Close",
+      "menu": "Toggle navigation menu"
+    },
+    "meta": {
+      "tagline": "Architecture you carry."
+    }
+  },
+  "cart": {
+    "title": "Shopping Bag",
+    "empty": "Your shopping bag is currently empty.",
+    "continue_shopping": "\u2190 CONTINUE EXPLORING OBJECTS",
+    "subtotal": "SUBTOTAL",
+    "packaging": "PACKAGING",
+    "shipping": "SHIPPING",
+    "total": "TOTAL",
+    "checkout": "PROCEED TO CHECKOUT \u2192",
+    "remove": "REMOVE",
+    "quantity": "Quantity"
+  },
+  "products": {
+    "add_to_bag": "ADD TO BAG",
+    "adding": "ADDING TO BAG...",
+    "sold_out": "EDITION ALLOCATED",
+    "dimensions": "DIMENSIONS",
+    "inspect_cta": "INSPECT MODULAR ARCHITECTURE \u2192"
+  },
+  "customer": {
+    "account": {
+      "title": "Client Account",
+      "sign_out": "SIGN OUT \u2192"
+    },
+    "login": {
+      "title": "Sign In",
+      "submit": "SIGN IN TO ACCOUNT"
+    },
+    "register": {
+      "title": "Create Account",
+      "submit": "CREATE ACCOUNT"
+    }
+  }
+}

@@ -1,0 +1,80 @@
+<!doctype html>
+<html
+  lang="{{ request.locale.iso_code }}"
+  data-gsap-enabled="{{ settings.enable_gsap }}"
+  data-webgl-enabled="{{ settings.enable_webgl_stage }}"
+  data-cart-drawer="{{ settings.enable_cart_drawer }}"
+>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <meta name="theme-color" content="{{ settings.color_obsidian_calf | default: '#141413' }}">
+    <link rel="canonical" href="{{ canonical_url }}">
+
+    <title>
+      {{- page_title -}}
+      {%- if current_tags %} &ndash; tagged "{{ current_tags | join: ', ' }}"{% endif -%}
+      {%- if current_page != 1 %} &ndash; Page {{ current_page }}{% endif -%}
+      {%- unless page_title contains shop.name %} &ndash; {{ shop.name }}{% endunless -%}
+    </title>
+
+    {%- if page_description -%}
+      <meta name="description" content="{{ page_description | escape }}">
+    {%- endif -%}
+
+    {%- if settings.load_google_fonts -%}
+      <link rel="preconnect" href="https://fonts.googleapis.com">
+      <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+      <link
+        href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500&family=IBM+Plex+Mono:wght@400;500&family=Manrope:wght@400;500&family=Space+Grotesk:wght@400;500&display=swap"
+        rel="stylesheet"
+      >
+    {%- endif -%}
+
+    {%- comment -%} Load critical CSS before content_for_header per Shopify best practices {%- endcomment -%}
+    {{ 'tokens.css' | asset_url | stylesheet_tag }}
+    {{ 'base.css' | asset_url | stylesheet_tag }}
+    {{ 'components.css' | asset_url | stylesheet_tag }}
+
+    <style>
+      :root {
+        --sv-chalk-canvas: {{ settings.color_chalk_canvas }};
+        --sv-warm-chalk: {{ settings.color_warm_chalk }};
+        --sv-obsidian-calf: {{ settings.color_obsidian_calf }};
+        --sv-anodised-charcoal: {{ settings.color_anodised_charcoal }};
+        --sv-slate-graphite: {{ settings.color_slate_graphite }};
+        --sv-limestone-rule: {{ settings.color_limestone_rule }};
+        --sv-volt-brass: {{ settings.color_volt_brass }};
+        --sv-saddle-cognac: {{ settings.color_saddle_cognac }};
+        --sv-oxblood-noir: {{ settings.color_oxblood_noir }};
+        --sv-mineral-sage: {{ settings.color_mineral_sage }};
+      }
+    </style>
+
+    {{ content_for_header }}
+
+    {%- if settings.enable_gsap -%}
+      <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js" defer></script>
+      <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js" defer></script>
+    {%- endif -%}
+    <script src="{{ 'seravolt-webgl.js' | asset_url }}" defer></script>
+    <script src="{{ 'seravolt-components.js' | asset_url }}" defer></script>
+    <script src="{{ 'seravolt-motion.js' | asset_url }}" defer></script>
+  </head>
+
+  <body class="template-{{ template.name }}">
+    <a class="skip-link" href="#MainContent">{{ 'general.accessibility.skip_to_content' | t }}</a>
+
+    {% sections 'header-group' %}
+
+    <main id="MainContent" role="main" tabindex="-1">
+      {{ content_for_layout }}
+    </main>
+
+    {% sections 'footer-group' %}
+
+    {%- if settings.enable_cart_drawer -%}
+      {% section 'cart-drawer' %}
+    {%- endif -%}
+  </body>
+</html>

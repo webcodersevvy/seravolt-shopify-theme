@@ -1,0 +1,22 @@
+{
+  "current": {
+    "color_chalk_canvas": "#FFFFFF",
+    "color_warm_chalk": "#F6F4EF",
+    "color_obsidian_calf": "#141413",
+    "color_anodised_charcoal": "#2A2927",
+    "color_slate_graphite": "#6E6B65",
+    "color_limestone_rule": "#E2DDD5",
+    "color_volt_brass": "#C69749",
+    "color_saddle_cognac": "#8C4A2F",
+    "color_oxblood_noir": "#4A1C24",
+    "color_mineral_sage": "#7A8B7B",
+    "load_google_fonts": true,
+    "enable_gsap": true,
+    "enable_webgl_stage": true,
+    "enable_cart_drawer": true,
+    "brand_wordmark": "SERAVOLT",
+    "edition_label": "EDITION 01",
+    "packaging_note": "Rigid Archive Box & Dust Bag",
+    "shipping_note": "Complimentary Insured Courier"
+  }
+}

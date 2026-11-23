@@ -1,0 +1,53 @@
+<footer class="sv-footer" role="contentinfo">
+  <div class="sv-container">
+    <div class="sv-footer__grid">
+      <div class="sv-footer__col">
+        <a href="{{ routes.root_url }}" class="sv-wordmark" style="font-size: 24px;">
+          {{ settings.brand_wordmark | default: shop.name }}
+        </a>
+        <p class="sv-body sv-muted" style="max-width: 420px;">
+          {{ section.settings.brand_statement }}
+        </p>
+      </div>
+
+      <div class="sv-footer__col">
+        <p class="sv-mono sv-muted">MODULAR SYSTEM</p>
+        <a href="{{ routes.all_products_collection_url }}" class="sv-body">All Objects (06)</a>
+        <a href="{{ routes.collections_url }}" class="sv-body">Collections</a>
+        <a href="/collections/the-chassis-line" class="sv-body">The Chassis Line</a>
+        <a href="/collections/the-module-atelier" class="sv-body">The Module Atelier</a>
+      </div>
+
+      <div class="sv-footer__col">
+        <p class="sv-mono sv-muted">CLIENT SERVICE</p>
+        <a href="/pages/about" class="sv-body">About SERAVOLT</a>
+        {%- if shop.customer_accounts_enabled -%}
+          <a href="{{ routes.account_url }}" class="sv-body">Client Account</a>
+        {%- endif -%}
+        <a href="/pages/contact" class="sv-body">Contact &amp; Care</a>
+        <a href="/pages/shipping-returns" class="sv-body">Shipping &amp; Returns</a>
+        <a href="/pages/terms" class="sv-body">Terms of Service</a>
+        <a href="/pages/disclaimer" class="sv-body">Disclaimer</a>
+      </div>
+    </div>
+
+    <div class="sv-footer__bottom">
+      <p class="sv-mono sv-muted">&copy; {{ 'now' | date: '%Y' }} {{ settings.brand_wordmark | default: shop.name }}. ALL RIGHTS RESERVED.</p>
+      <p class="sv-mono sv-muted">ARCHITECTURE YOU CARRY  ·  {{ settings.edition_label }}</p>
+    </div>
+  </div>
+</footer>
+
+{% schema %}
+{
+  "name": "Site Footer",
+  "settings": [
+    {
+      "type": "textarea",
+      "id": "brand_statement",
+      "label": "Brand Statement",
+      "default": "Architecture you carry. Italian full-grain calfskin handbags engineered with concealed CNC-milled brass modular lock points."
+    }
+  ]
+}
+{% endschema %}

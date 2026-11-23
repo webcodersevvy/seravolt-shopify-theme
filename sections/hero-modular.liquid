@@ -1,0 +1,75 @@
+<section class="sv-section sv-section--warm" aria-labelledby="HeroHeading-{{ section.id }}">
+  <div class="sv-container">
+    <div class="sv-hero-split">
+      <div class="sv-hero-narrative" data-sv-reveal>
+        <p class="sv-mono sv-muted">{{ section.settings.eyebrow }}</p>
+        <h1 class="sv-display-serif" id="HeroHeading-{{ section.id }}">
+          {{ section.settings.heading | newline_to_br }}
+        </h1>
+        <p class="sv-editorial-lead sv-muted">{{ section.settings.lead }}</p>
+
+        <div class="sv-hero-ctas">
+          <a href="{{ section.settings.primary_url | default: routes.all_products_collection_url }}" class="sv-btn">
+            {{ section.settings.primary_label }}
+          </a>
+          <a href="{{ section.settings.secondary_url | default: '/collections/the-chassis-line' }}" class="sv-link-arrow">
+            {{ section.settings.secondary_label }}
+          </a>
+        </div>
+      </div>
+
+      <div data-sv-reveal>
+        {% render 'modular-mode-switcher', id_suffix: section.id %}
+      </div>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "01 Architectural Hero",
+  "settings": [
+    { 
+      "type": "text", 
+      "id": "eyebrow", 
+      "label": "Eyebrow", 
+      "default": "EDITION 01  ·  MILAN / LONDON  ·  MODULAR HANDBAGS" 
+    },
+    { 
+      "type": "textarea", 
+      "id": "heading", 
+      "label": "Display Headline", 
+      "default": "One chassis. Endless form." 
+    },
+    { 
+      "type": "textarea", 
+      "id": "lead", 
+      "label": "Editorial Lead", 
+      "default": "Architectural Italian box calfskin fitted with concealed CNC-milled Brushed Volt Brass lock points. Reconfigure from studio tote to architectural crossbody to evening folio clutch in seconds—without ever repacking." 
+    },
+    { 
+      "type": "text", 
+      "id": "primary_label", 
+      "label": "Primary CTA Label", 
+      "default": "EXPLORE EDITION 01 →" 
+    },
+    { 
+      "type": "url", 
+      "id": "primary_url", 
+      "label": "Primary CTA Link" 
+    },
+    { 
+      "type": "text", 
+      "id": "secondary_label", 
+      "label": "Secondary Link Label", 
+      "default": "THE CHASSIS LINE →" 
+    },
+    { 
+      "type": "url", 
+      "id": "secondary_url", 
+      "label": "Secondary Link URL" 
+    }
+  ],
+  "presets": [{ "name": "01 Architectural Hero" }]
+}
+{% endschema %}

@@ -1,0 +1,20 @@
+name: Shopify Theme Check & CI
+
+on:
+  push:
+    branches: [ main, staging ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  theme-check:
+    name: Validate Liquid & Theme Architecture
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Run Shopify Theme Check
+        uses: shopify/theme-check-action@v2
+        with:
+          path: .

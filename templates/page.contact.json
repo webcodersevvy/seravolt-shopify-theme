@@ -1,0 +1,11 @@
+{
+  "sections": {
+    "contact": {
+      "type": "contact-concierge",
+      "settings": {}
+    }
+  },
+  "order": [
+    "contact"
+  ]
+}

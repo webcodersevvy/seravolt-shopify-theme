@@ -1,0 +1,25 @@
+{% doc %}
+  SERAVOLT Specification Accordion theme block using accessible native <details>.
+{% enddoc %}
+
+<details class="sv-accordion" {% if block.settings.open_default %}open{% endif %} {{ block.shopify_attributes }}>
+  <summary class="sv-mono">
+    <span>{{ block.settings.heading }}</span>
+    <span class="sv-accordion__icon" aria-hidden="true">+</span>
+  </summary>
+  <div class="sv-accordion__content sv-body">
+    {{ block.settings.body }}
+  </div>
+</details>
+
+{% schema %}
+{
+  "name": "Specification Accordion",
+  "settings": [
+    { "type": "text", "id": "heading", "label": "Heading", "default": "MODULAR ENGINEERING" },
+    { "type": "richtext", "id": "body", "label": "Body", "default": "<p>Concealed CNC-milled Brushed Volt Brass lock points (±0.15 mm tolerance).</p>" },
+    { "type": "checkbox", "id": "open_default", "label": "Open by default", "default": false }
+  ],
+  "presets": [{ "name": "Specification Accordion" }]
+}
+{% endschema %}

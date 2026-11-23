@@ -1,0 +1,52 @@
+{% doc %}
+  Interactive 3-mode Modular Handbag Configurator with WebGL Brushed Brass shader backdrop.
+  @param {string} [id_suffix] - Unique ID suffix when rendered multiple times on a page
+{% enddoc %}
+
+{% assign uid = id_suffix | default: 'primary' %}
+<sv-mode-switcher id="sv-switcher-{{ uid }}">
+  <div class="sv-switcher__tabs" role="tablist" aria-label="Modular Carry Configurations">
+    <button
+      type="button"
+      class="sv-switcher__tab"
+      role="tab"
+      aria-selected="true"
+      aria-controls="sv-stage-{{ uid }}"
+    >01 STUDIO TOTE</button>
+    <button
+      type="button"
+      class="sv-switcher__tab"
+      role="tab"
+      aria-selected="false"
+      aria-controls="sv-stage-{{ uid }}"
+    >02 CROSSBODY</button>
+    <button
+      type="button"
+      class="sv-switcher__tab"
+      role="tab"
+      aria-selected="false"
+      aria-controls="sv-stage-{{ uid }}"
+    >03 FOLIO CLUTCH</button>
+  </div>
+
+  <div class="sv-switcher__stage" id="sv-stage-{{ uid }}" role="tabpanel">
+    <sv-brass-stage></sv-brass-stage>
+
+    <p class="sv-mono sv-switcher__status" data-sv-status>
+      08:00 — STUDIO CONFIGURATION  ·  4 LOCK PORTS ENGAGED
+    </p>
+
+    <div class="sv-silhouette" aria-hidden="true">
+      <div class="sv-silhouette__handle" data-sv-handle></div>
+      <div class="sv-silhouette__body" data-sv-body>
+        <div class="sv-silhouette__clasp" data-sv-clasp></div>
+        <div class="sv-silhouette__rail"></div>
+      </div>
+    </div>
+
+    <div class="sv-switcher__footer">
+      <p class="sv-mono" data-sv-spec>SV-001 MONOLITH + TOP HANDLES + 14” SLEEVE</p>
+      <p class="sv-mono sv-brass" data-sv-capacity>CAPACITY: 12.5 L</p>
+    </div>
+  </div>
+</sv-mode-switcher>

@@ -1,0 +1,42 @@
+<section class="sv-section" style="padding-block: 72px;">
+  <div class="sv-container">
+    <div class="sv-split-2">
+      <div class="sv-brand-panel sv-brand-panel--warm">
+        <p class="sv-mono sv-muted">EDITION 01  ·  PRIVATE REGISTRATION</p>
+        <h2 class="sv-display-serif">One chassis.<br>Endless form.</h2>
+        <p class="sv-body sv-muted">
+          Register your SERAVOLT serial number for lifetime brass clasp servicing.
+        </p>
+      </div>
+
+      <div style="display: flex; flex-direction: column; gap: 18px; padding: 12px 0;">
+        <h1 class="sv-section-title">{{ 'customer.register.title' | t }}</h1>
+        {%- form 'create_customer' -%}
+          {{ form.errors | default_errors }}
+          <div style="display: flex; flex-direction: column; gap: 18px;">
+            <div class="sv-split-2" style="gap: 16px;">
+              <div class="sv-field">
+                <label for="FirstName" class="sv-mono sv-muted">FIRST NAME</label>
+                <input id="FirstName" type="text" name="customer[first_name]" class="sv-input" placeholder="Elena">
+              </div>
+              <div class="sv-field">
+                <label for="LastName" class="sv-mono sv-muted">LAST NAME</label>
+                <input id="LastName" type="text" name="customer[last_name]" class="sv-input" placeholder="Vance">
+              </div>
+            </div>
+            <div class="sv-field">
+              <label for="RegEmail" class="sv-mono sv-muted">EMAIL ADDRESS</label>
+              <input id="RegEmail" type="email" name="customer[email]" class="sv-input" placeholder="client@domain.com" required>
+            </div>
+            <div class="sv-field">
+              <label for="RegPass" class="sv-mono sv-muted">PASSWORD</label>
+              <input id="RegPass" type="password" name="customer[password]" class="sv-input" placeholder="Minimum 8 characters" required>
+            </div>
+            <button type="submit" class="sv-btn sv-btn--full">{{ 'customer.register.submit' | t }}</button>
+          </div>
+        {%- endform -%}
+        <a href="{{ routes.account_login_url }}" class="sv-link-arrow">ALREADY REGISTERED? SIGN IN →</a>
+      </div>
+    </div>
+  </div>
+</section>

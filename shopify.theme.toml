@@ -1,0 +1,8 @@
+# Shopify CLI v3 Multi-Environment Configuration
+[environments.development]
+store = "your-store.myshopify.com"
+theme = "development"
+
+[environments.production]
+store = "your-store.myshopify.com"
+live = true

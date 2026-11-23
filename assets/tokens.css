@@ -1,0 +1,43 @@
+/* SERAVOLT — Modular Handbags Design System Tokens
+ * Exact 1:1 parity with Framer ColorStyleTokenNode & TextStylePresetNode
+ */
+:root {
+  /* Semantic Architecture Tokens */
+  --light: var(--sv-chalk-canvas, #FFFFFF);
+  --dark: var(--sv-obsidian-calf, #141413);
+  --bright: var(--sv-volt-brass, #C69749);
+  --neutral: var(--sv-slate-graphite, #6E6B65);
+
+  /* Brand Palette */
+  --sv-chalk-canvas: #FFFFFF;
+  --sv-warm-chalk: #F6F4EF;
+  --sv-obsidian-calf: #141413;
+  --sv-obsidian-panel: #1B1A18;
+  --sv-anodised-charcoal: #2A2927;
+  --sv-slate-graphite: #6E6B65;
+  --sv-limestone-rule: #E2DDD5;
+  --sv-volt-brass: #C69749;
+  --sv-saddle-cognac: #8C4A2F;
+  --sv-oxblood-noir: #4A1C24;
+  --sv-mineral-sage: #7A8B7B;
+
+  /* Typography Families */
+  --font-display: 'Cormorant Garamond', Georgia, serif;
+  --font-code: 'Space Grotesk', system-ui, sans-serif;
+  --font-body: 'Manrope', system-ui, sans-serif;
+  --font-mono: 'IBM Plex Mono', ui-monospace, SFMono-Regular, monospace;
+
+  /* Layout Metrics (Framer Desktop 1440px -> Inner 1344px) */
+  --sv-container-max: 1344px;
+  --sv-gutter-desktop: 48px;
+  --sv-gutter-tablet: 32px;
+  --sv-gutter-mobile: 20px;
+  --sv-header-height: 76px;
+  --sv-announcement-height: 34px;
+
+  /* Motion */
+  --sv-ease-arch: cubic-bezier(0.22, 1, 0.36, 1);
+  --sv-duration-fast: 180ms;
+  --sv-duration-base: 340ms;
+  --sv-duration-slow: 620ms;
+}

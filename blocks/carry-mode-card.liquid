@@ -1,0 +1,30 @@
+{% doc %}
+  SERAVOLT 24-Hour Carry Mode architectural card block.
+
+  @param {string} time_label - {{ block.settings.time_label }} (e.g., 08:00 — STUDIO)
+  @param {string} title - {{ block.settings.title }} (e.g., MONOLITH TOTE)
+  @param {string} description - {{ block.settings.description }} (e.g., Core chassis fitted with top handles and a padded 14-inch workstation sleeve.)
+{% enddoc %}
+
+<article class="sv-mode-card" data-sv-reveal {{ block.shopify_attributes }}>
+  <p class="sv-mono sv-mode-card__time">● {{ time_label }}</p>
+  <h3 class="sv-product-code">{{ title }}</h3>
+  <p class="sv-body sv-mode-card__desc">{{ description }}</p>
+</article>
+
+{% schema %}
+{
+  "name": "Carry Mode Card",
+  "settings": [
+    { "type": "text", "id": "time_label", "label": "Time Label", "default": "08:00 — STUDIO" },
+    { "type": "text", "id": "title", "label": "Mode Title", "default": "MONOLITH TOTE" },
+    {
+      "type": "textarea",
+      "id": "description",
+      "label": "Description",
+      "default": "Core chassis fitted with top handles and a padded 14-inch workstation sleeve."
+    }
+  ],
+  "presets": [{ "name": "Carry Mode Card" }]
+}
+{% endschema %}

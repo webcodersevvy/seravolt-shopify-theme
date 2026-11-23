@@ -1,0 +1,42 @@
+{%- assign target_collection = section.settings.collection | default: collections['all'] -%}
+
+<section class="sv-section" aria-labelledby="CatalogueHeading-{{ section.id }}">
+  <div class="sv-container">
+    <div class="sv-band-header" data-sv-reveal>
+      <div>
+        <p class="sv-mono sv-muted" style="margin-bottom: 10px;">{{ section.settings.eyebrow }}</p>
+        <h2 class="sv-section-title" id="CatalogueHeading-{{ section.id }}">{{ section.settings.heading }}</h2>
+      </div>
+      <a href="{{ routes.all_products_collection_url }}" class="sv-link-arrow">BROWSE ALL OBJECTS →</a>
+    </div>
+
+    <div class="sv-product-grid">
+      {%- if target_collection != blank and target_collection.products_count > 0 -%}
+        {%- for product in target_collection.products limit: section.settings.products_to_show -%}
+          {% render 'modular-product-card', product: product %}
+        {%- endfor -%}
+      {%- else -%}
+        {%- comment -%} Canonical SERAVOLT Edition 01 preview objects when store catalog is empty {%- endcomment -%}
+        {% render 'modular-product-card', demo_title: 'MONOLITH TOTE', demo_price: '$680 USD', demo_spec: '380×290×125 mm · Tuscan Box Calf · 4 Lock Ports', demo_meta: 'SV-001 · OBSIDIAN CALF · SADDLE COGNAC', demo_badge: 'CORE CHASSIS', demo_swatch: '#141413' %}
+        {% render 'modular-product-card', demo_title: 'AXIS CROSSBODY', demo_price: '$490 USD', demo_spec: '260×185×85 mm · Pebbled Calf · 3 Lock Ports', demo_meta: 'SV-002 · SADDLE COGNAC · OBSIDIAN CALF', demo_badge: 'CORE CHASSIS', demo_swatch: '#8C4A2F' %}
+        {% render 'modular-product-card', demo_title: 'CHAMBER BUCKET', demo_price: '$540 USD', demo_spec: '240×270×140 mm · Structured Gusset · Brass Base', demo_meta: 'SV-003 · ANODISED CHARCOAL · BRUSHED BRASS', demo_badge: 'CORE CHASSIS', demo_swatch: '#2A2927' %}
+        {% render 'modular-product-card', demo_title: 'FOLIO CLUTCH MODULE', demo_price: '$240 USD', demo_spec: '210×130×25 mm · Magnetic Front Snap · Oxblood', demo_meta: 'SV-004 · OXBLOOD NOIR · OBSIDIAN CALF', demo_badge: 'MODULE', demo_swatch: '#4A1C24' %}
+        {% render 'modular-product-card', demo_title: '40MM ARCHITECT STRAP', demo_price: '$160 USD', demo_spec: '1100×40 mm · Saddle Leather · CNC Brass Clasps', demo_meta: 'SV-005 · SADDLE COGNAC · OBSIDIAN CALF', demo_badge: 'MODULE', demo_swatch: '#8C4A2F' %}
+        {% render 'modular-product-card', demo_title: 'VOLT NANO POD', demo_price: '$120 USD', demo_spec: '85×85×35 mm · AirPods / Key Module · Brushed Brass', demo_meta: 'SV-006 · OBSIDIAN CALF · MINERAL SAGE', demo_badge: 'MODULE', demo_swatch: '#141413' %}
+      {%- endif -%}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "04 Edition 01 Catalogue",
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "03 / LIVE CATALOGUE  ·  06 OBJECTS" },
+    { "type": "text", "id": "heading", "label": "Heading", "default": "Edition 01 Objects" },
+    { "type": "collection", "id": "collection", "label": "Collection" },
+    { "type": "range", "id": "products_to_show", "min": 2, "max": 12, "step": 2, "default": 6, "label": "Products to display" }
+  ],
+  "presets": [{ "name": "04 Edition 01 Catalogue" }]
+}
+{% endschema %}

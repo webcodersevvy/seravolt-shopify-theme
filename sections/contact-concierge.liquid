@@ -1,0 +1,56 @@
+<section class="sv-section" style="padding-block: 72px;">
+  <div class="sv-container">
+    <div class="sv-split-2">
+      <div style="display: flex; flex-direction: column; gap: 20px;">
+        <p class="sv-mono sv-muted">CLIENT CONCIERGE  ·  HARDWARE SERVICE</p>
+        <h1 class="sv-section-title">Contact SERAVOLT</h1>
+        <p class="sv-body sv-muted">
+          Reach our Milan &amp; London client studio for modular configuration advice, brass clasp servicing, or private appointments.
+        </p>
+        <div style="padding-top: 14px; border-top: 1px solid var(--sv-limestone-rule);">
+          <p class="sv-mono sv-muted">CONCIERGE</p>
+          <p class="sv-body">concierge@seravolt.com</p>
+        </div>
+        <div style="padding-top: 14px; border-top: 1px solid var(--sv-limestone-rule);">
+          <p class="sv-mono sv-muted">HARDWARE SERVICE</p>
+          <p class="sv-body">atelier@seravolt.com</p>
+        </div>
+        <div style="padding-top: 14px; border-top: 1px solid var(--sv-limestone-rule);">
+          <p class="sv-mono sv-muted">HOURS</p>
+          <p class="sv-body">MON – FRI · 09:00 – 18:00 GMT</p>
+        </div>
+      </div>
+
+      <div class="sv-summary-card">
+        {%- form 'contact' -%}
+          {%- if form.posted_successfully? -%}
+            <p class="sv-mono sv-brass" style="margin-bottom: 16px;">ENQUIRY RECEIVED — OUR CONCIERGE WILL RESPOND SHORTLY.</p>
+          {%- endif -%}
+          <div style="display: flex; flex-direction: column; gap: 20px;">
+            <div class="sv-field">
+              <label for="ContactName" class="sv-mono sv-muted">FULL NAME</label>
+              <input id="ContactName" type="text" name="contact[name]" class="sv-input" placeholder="Elena Vance" required>
+            </div>
+            <div class="sv-field">
+              <label for="ContactEmail" class="sv-mono sv-muted">EMAIL ADDRESS</label>
+              <input id="ContactEmail" type="email" name="contact[email]" class="sv-input" placeholder="client@domain.com" required>
+            </div>
+            <div class="sv-field">
+              <label for="ContactBody" class="sv-mono sv-muted">ENQUIRY</label>
+              <textarea id="ContactBody" name="contact[body]" class="sv-textarea" placeholder="Chassis model, strap compatibility, or appointment request..." required></textarea>
+            </div>
+            <button type="submit" class="sv-btn sv-btn--full">SEND ENQUIRY</button>
+          </div>
+        {%- endform -%}
+      </div>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Contact Concierge",
+  "settings": [],
+  "presets": [{ "name": "Contact Concierge" }]
+}
+{% endschema %}

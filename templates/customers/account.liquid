@@ -1,0 +1,40 @@
+<section class="sv-section" style="padding-block: 72px;">
+  <div class="sv-container" style="display: flex; flex-direction: column; gap: 36px;">
+    <div class="sv-band-header" style="margin-bottom: 0; padding-bottom: 24px; border-bottom: 1px solid var(--sv-limestone-rule);">
+      <div>
+        <p class="sv-mono sv-muted" style="margin-bottom: 8px;">PRIVATE CLIENT PORTAL  ·  SERIAL REGISTRY</p>
+        <h1 class="sv-section-title">Welcome, {{ customer.name }}.</h1>
+      </div>
+      <a href="{{ routes.account_logout_url }}" class="sv-link-arrow">{{ 'customer.account.sign_out' | t }}</a>
+    </div>
+
+    <div class="sv-stats-3">
+      <div class="sv-stat-card">
+        <span class="sv-mono sv-muted">REGISTERED CHASSIS</span>
+        <strong class="sv-product-code" style="font-size: 20px;">{{ customer.metafields.seravolt.serial.value | default: 'EDITION 01 MEMBER' }}</strong>
+      </div>
+      <div class="sv-stat-card">
+        <span class="sv-mono sv-muted">TOTAL ORDERS</span>
+        <strong class="sv-product-code" style="font-size: 20px;">{{ customer.orders_count }} Dispatch</strong>
+      </div>
+      <div class="sv-stat-card">
+        <span class="sv-mono sv-muted">HARDWARE SERVICE</span>
+        <strong class="sv-product-code" style="font-size: 20px;">Lifetime Brass Care</strong>
+      </div>
+    </div>
+
+    <div>
+      <p class="sv-mono sv-muted" style="margin-bottom: 16px;">ORDER HISTORY</p>
+      {%- if customer.orders.size > 0 -%}
+        {%- for order in customer.orders -%}
+          <div class="sv-summary-row" style="padding: 18px 0; border-bottom: 1px solid var(--sv-limestone-rule);">
+            <a href="{{ order.customer_url }}" class="sv-mono">{{ order.name }} · {{ order.created_at | date: '%b %d, %Y' }}</a>
+            <span class="sv-mono">{{ order.financial_status_label }} · {{ order.total_net_amount | money_with_currency }}</span>
+          </div>
+        {%- endfor -%}
+      {%- else -%}
+        <p class="sv-body sv-muted">No dispatches recorded yet.</p>
+      {%- endif -%}
+    </div>
+  </div>
+</section>

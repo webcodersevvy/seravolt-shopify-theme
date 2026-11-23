@@ -1,0 +1,59 @@
+<sv-cart-drawer aria-label="Shopping Bag Drawer">
+  <div class="sv-drawer__backdrop" data-drawer-close></div>
+  <div class="sv-drawer__panel" role="dialog" aria-modal="true" aria-label="Shopping Bag">
+    <div class="sv-drawer__header">
+      <p class="sv-mono">SHOPPING BAG  ·  {{ cart.item_count }} OBJECTS</p>
+      <button type="button" class="sv-mono" data-drawer-close-btn>CLOSE ✕</button>
+    </div>
+
+    <div class="sv-drawer__body" data-drawer-content>
+      {%- if cart.item_count == 0 -%}
+        <div style="padding: 48px 0; display: flex; flex-direction: column; gap: 20px;">
+          <p class="sv-body sv-muted">{{ 'cart.empty' | t }}</p>
+          <a href="{{ routes.all_products_collection_url }}" class="sv-btn">EXPLORE EDITION 01 →</a>
+        </div>
+      {%- else -%}
+        {%- for item in cart.items -%}
+          <div class="sv-cart-item" style="grid-template-columns: 76px 1fr; padding: 20px 0;">
+            <div class="sv-cart-thumb" style="width: 76px; height: 94px;">
+              {%- if item.image -%}
+                {{ item.image | image_url: width: 160 | image_tag: alt: item.title, loading: 'lazy' }}
+              {%- endif -%}
+            </div>
+            <div style="display: flex; flex-direction: column; gap: 6px;">
+              <div class="sv-summary-row">
+                <a href="{{ item.url }}" class="sv-product-code" style="font-size: 14px;">{{ item.product.title }}</a>
+                <span class="sv-mono">{{ item.final_line_price | money_with_currency }}</span>
+              </div>
+              <p class="sv-mono sv-muted">{{ item.variant.title }}</p>
+              <div style="display: flex; align-items: center; gap: 14px; margin-top: 6px;">
+                <div class="sv-qty">
+                  <button type="button" data-cart-qty="{{ item.quantity | minus: 1 }}" data-line-key="{{ item.key }}">−</button>
+                  <span>{{ item.quantity }}</span>
+                  <button type="button" data-cart-qty="{{ item.quantity | plus: 1 }}" data-line-key="{{ item.key }}">+</button>
+                </div>
+                <button type="button" class="sv-mono sv-muted" data-cart-qty="0" data-line-key="{{ item.key }}">REMOVE</button>
+              </div>
+            </div>
+          </div>
+        {%- endfor -%}
+      {%- endif -%}
+    </div>
+
+    <div class="sv-drawer__footer">
+      <div class="sv-summary-row">
+        <span class="sv-mono sv-muted">{{ 'cart.subtotal' | t }}</span>
+        <span class="sv-mono">{{ cart.total_price | money_with_currency }}</span>
+      </div>
+      <a href="/checkout" class="sv-btn sv-btn--full">{{ 'cart.checkout' | t }}</a>
+      <a href="{{ routes.cart_url }}" class="sv-link-arrow" style="margin-inline: auto;">VIEW FULL SHOPPING BAG →</a>
+    </div>
+  </div>
+</sv-cart-drawer>
+
+{% schema %}
+{
+  "name": "Cart Drawer",
+  "settings": []
+}
+{% endschema %}

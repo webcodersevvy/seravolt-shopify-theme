@@ -1,0 +1,38 @@
+<section class="sv-dispatch" aria-labelledby="DispatchHeading-{{ section.id }}">
+  <div class="sv-dispatch__inner" data-sv-reveal>
+    <p class="sv-mono sv-muted">{{ section.settings.eyebrow }}</p>
+    <h2 class="sv-section-title" id="DispatchHeading-{{ section.id }}">{{ section.settings.heading }}</h2>
+
+    {%- form 'customer', class: 'sv-dispatch__form' -%}
+      <input type="hidden" name="contact[tags]" value="newsletter,edition-02-dispatch">
+      <label for="DispatchEmail-{{ section.id }}" class="sr-only">Email address</label>
+      <input
+        id="DispatchEmail-{{ section.id }}"
+        type="email"
+        name="contact[email]"
+        class="sv-dispatch__input"
+        placeholder="{{ section.settings.placeholder }}"
+        autocomplete="email"
+        required
+      >
+      <button type="submit" class="sv-mono">{{ section.settings.cta_label }}</button>
+    {%- endform -%}
+
+    {%- if form.posted_successfully? -%}
+      <p class="sv-mono sv-brass">REGISTERED FOR EDITION 02 DISPATCH.</p>
+    {%- endif -%}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Private Dispatch",
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "EDITION 02 ACCESS  ·  ATELIER DISPATCH" },
+    { "type": "text", "id": "heading", "label": "Heading", "default": "Private Dispatch" },
+    { "type": "text", "id": "placeholder", "label": "Email Placeholder", "default": "Email address" },
+    { "type": "text", "id": "cta_label", "label": "Button Label", "default": "SUBSCRIBE" }
+  ],
+  "presets": [{ "name": "Private Dispatch" }]
+}
+{% endschema %}

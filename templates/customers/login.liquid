@@ -1,0 +1,32 @@
+<section class="sv-section" style="padding-block: 72px;">
+  <div class="sv-container">
+    <div class="sv-split-2">
+      <div class="sv-brand-panel sv-brand-panel--dark">
+        <p class="sv-mono sv-brass">SERAVOLT  ·  CLIENT REGISTRY</p>
+        <h2 class="sv-display-serif">Architecture you carry.</h2>
+        <p class="sv-body" style="color: rgba(255,255,255,0.72);">
+          Manage registered chassis serials, modular add-ons, and complimentary hardware care.
+        </p>
+      </div>
+
+      <div style="display: flex; flex-direction: column; gap: 20px; padding: 24px 0;">
+        <h1 class="sv-section-title">{{ 'customer.login.title' | t }}</h1>
+        {%- form 'customer_login' -%}
+          {{ form.errors | default_errors }}
+          <div style="display: flex; flex-direction: column; gap: 20px;">
+            <div class="sv-field">
+              <label for="CustomerEmail" class="sv-mono sv-muted">EMAIL ADDRESS</label>
+              <input id="CustomerEmail" type="email" name="customer[email]" class="sv-input" placeholder="client@domain.com" autocomplete="email" required>
+            </div>
+            <div class="sv-field">
+              <label for="CustomerPassword" class="sv-mono sv-muted">PASSWORD</label>
+              <input id="CustomerPassword" type="password" name="customer[password]" class="sv-input" placeholder="••••••••••••" autocomplete="current-password" required>
+            </div>
+            <button type="submit" class="sv-btn sv-btn--full">{{ 'customer.login.submit' | t }}</button>
+          </div>
+        {%- endform -%}
+        <a href="{{ routes.account_register_url }}" class="sv-link-arrow">NEW TO SERAVOLT? CREATE AN ACCOUNT →</a>
+      </div>
+    </div>
+  </div>
+</section>

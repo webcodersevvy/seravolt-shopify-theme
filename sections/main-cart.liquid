@@ -1,0 +1,95 @@
+<section class="sv-section" style="padding-block: 72px;">
+  <div class="sv-container" style="display: flex; flex-direction: column; gap: 36px;">
+    <div class="sv-steps">
+      <span class="sv-mono sv-step sv-step--active">01 / SHOPPING BAG</span>
+      <span class="sv-mono sv-muted">→</span>
+      <span class="sv-mono sv-step">02 / DISPATCH DETAILS</span>
+      <span class="sv-mono sv-muted">→</span>
+      <span class="sv-mono sv-step">03 / PAYMENT</span>
+    </div>
+
+    <h1 class="sv-section-title">{{ 'cart.title' | t }}</h1>
+
+    {%- if cart.item_count == 0 -%}
+      <p class="sv-editorial-lead sv-muted">{{ 'cart.empty' | t }}</p>
+      <div>
+        <a href="{{ routes.all_products_collection_url }}" class="sv-btn">{{ 'cart.continue_shopping' | t }}</a>
+      </div>
+    {%- else -%}
+      <form action="{{ routes.cart_url }}" method="post" class="sv-cart-split">
+        <div>
+          {%- for item in cart.items -%}
+            <article class="sv-cart-item">
+              <div class="sv-cart-thumb">
+                {%- if item.image -%}
+                  {{ item.image | image_url: width: 224 | image_tag: alt: item.title, loading: 'lazy' }}
+                {%- else -%}
+                  <div style="width: 54px; height: 42px; background: #141413; border: 1px solid #2A2927;"></div>
+                {%- endif -%}
+              </div>
+
+              <div style="display: flex; flex-direction: column; gap: 8px;">
+                <h2 class="sv-product-code" style="font-size: 18px;">
+                  <a href="{{ item.url }}">{{ item.product.title }}</a>
+                </h2>
+                <p class="sv-mono sv-muted">
+                  {{ item.sku | default: 'EDITION 01' }}{% unless item.product.has_only_default_variant %} · {{ item.variant.title }}{% endunless %}
+                </p>
+                <div style="display: flex; align-items: center; gap: 16px; margin-top: 8px;">
+                  <div class="sv-qty">
+                    <a href="{{ routes.cart_change_url }}?id={{ item.key }}&quantity={{ item.quantity | minus: 1 }}" aria-label="Decrease quantity" style="padding: 6px 12px;">−</a>
+                    <span>{{ item.quantity }}</span>
+                    <a href="{{ routes.cart_change_url }}?id={{ item.key }}&quantity={{ item.quantity | plus: 1 }}" aria-label="Increase quantity" style="padding: 6px 12px;">+</a>
+                  </div>
+                  <a href="{{ item.url_to_remove }}" class="sv-mono sv-muted">{{ 'cart.remove' | t }}</a>
+                </div>
+              </div>
+
+              <p class="sv-mono">{{ item.final_line_price | money_with_currency }}</p>
+            </article>
+          {%- endfor -%}
+
+          <div style="padding-top: 24px;">
+            <a href="{{ routes.all_products_collection_url }}" class="sv-link-arrow">{{ 'cart.continue_shopping' | t }}</a>
+          </div>
+        </div>
+
+        <aside class="sv-summary-card">
+          <p class="sv-mono sv-muted">ORDER SUMMARY  ·  {{ cart.item_count }} OBJECTS</p>
+          <div style="display: flex; flex-direction: column; gap: 12px;">
+            <div class="sv-summary-row">
+              <span class="sv-mono sv-muted">{{ 'cart.subtotal' | t }}</span>
+              <span class="sv-mono">{{ cart.total_price | money_with_currency }}</span>
+            </div>
+            <div class="sv-summary-row">
+              <span class="sv-mono sv-muted">{{ 'cart.packaging' | t }}</span>
+              <span class="sv-body">{{ settings.packaging_note }}</span>
+            </div>
+            <div class="sv-summary-row">
+              <span class="sv-mono sv-muted">{{ 'cart.shipping' | t }}</span>
+              <span class="sv-body">{{ settings.shipping_note }}</span>
+            </div>
+            <div class="sv-summary-row sv-summary-total">
+              <span class="sv-mono">{{ 'cart.total' | t }}</span>
+              <span class="sv-product-code" style="font-size: 18px;">{{ cart.total_price | money_with_currency }}</span>
+            </div>
+          </div>
+
+          <button type="submit" name="checkout" class="sv-btn sv-btn--full">
+            {{ 'cart.checkout' | t }}
+          </button>
+          <p class="sv-body sv-muted" style="font-size: 12px;">
+            Dispatched in signature rigid archive box with organic cotton dust bag.
+          </p>
+        </aside>
+      </form>
+    {%- endif -%}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Main Cart",
+  "settings": []
+}
+{% endschema %}

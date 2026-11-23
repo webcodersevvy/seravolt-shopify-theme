@@ -1,0 +1,64 @@
+<sv-header-menu>
+  <header class="sv-header" role="banner">
+    <div class="sv-header__row">
+      <nav class="sv-header__nav" aria-label="Primary Navigation">
+        <button
+          type="button"
+          class="sv-header__menu-btn"
+          data-menu-trigger
+          aria-expanded="false"
+          aria-controls="SvMobileDrawer"
+        >MENU</button>
+
+        <div class="sv-header__nav sv-header__desktop-links">
+          {%- for link in section.settings.left_menu.links -%}
+            <a
+              href="{{ link.url }}"
+              class="sv-header__link"
+              {% if link.active %}aria-current="page"{% endif %}
+            >{{ link.title }}</a>
+          {%- else -%}
+            <a href="{{ routes.all_products_collection_url }}" class="sv-header__link">OBJECTS</a>
+            <a href="{{ routes.collections_url }}" class="sv-header__link">COLLECTIONS</a>
+            <a href="/pages/about" class="sv-header__link">ABOUT</a>
+          {%- endfor -%}
+        </div>
+      </nav>
+
+      <a href="{{ routes.root_url }}" class="sv-wordmark" aria-label="{{ shop.name }}">
+        {{ settings.brand_wordmark | default: shop.name }}
+      </a>
+
+      <nav class="sv-header__nav sv-header__nav--right" aria-label="Utility Navigation">
+        {%- if shop.customer_accounts_enabled -%}
+          <a href="{{ routes.account_url }}" class="sv-header__link sv-header__link--hide-mobile">ACCOUNT</a>
+        {%- endif -%}
+        <a href="/pages/contact" class="sv-header__link sv-header__link--hide-mobile">CONTACT</a>
+        <a href="{{ routes.cart_url }}" class="sv-header__link" data-bag-trigger data-cart-count>
+          BAG ({{ cart.item_count }})
+        </a>
+      </nav>
+    </div>
+
+    <div class="sv-mobile-drawer" id="SvMobileDrawer" data-mobile-drawer>
+      <a href="{{ routes.all_products_collection_url }}" class="sv-product-code">All Objects (06)</a>
+      <a href="{{ routes.collections_url }}" class="sv-product-code">Collections</a>
+      <a href="/collections/the-chassis-line" class="sv-product-code">The Chassis Line</a>
+      <a href="/collections/the-module-atelier" class="sv-product-code">The Module Atelier</a>
+      <a href="/pages/about" class="sv-product-code">About SERAVOLT</a>
+      {%- if shop.customer_accounts_enabled -%}
+        <a href="{{ routes.account_url }}" class="sv-product-code">Client Account</a>
+      {%- endif -%}
+      <a href="/pages/contact" class="sv-product-code">Contact &amp; Service</a>
+    </div>
+  </header>
+</sv-header-menu>
+
+{% schema %}
+{
+  "name": "Site Header",
+  "settings": [
+    { "type": "link_list", "id": "left_menu", "label": "Left Navigation Menu", "default": "main-menu" }
+  ]
+}
+{% endschema %}

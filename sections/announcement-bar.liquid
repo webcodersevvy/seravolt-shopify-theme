@@ -1,0 +1,15 @@
+{%- if section.settings.show_announcement -%}
+  <div class="sv-announcement" role="region" aria-label="Store Announcement">
+    <p class="sv-mono">{{ section.settings.text }}</p>
+  </div>
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "Announcement Bar",
+  "settings": [
+    { "type": "checkbox", "id": "show_announcement", "label": "Show announcement bar", "default": true },
+    { "type": "text", "id": "text", "label": "Announcement copy", "default": "EDITION 01  ·  COMPLIMENTARY INSURED COURIER ON ALL MODULAR CHASSIS ORDERS" }
+  ]
+}
+{% endschema %}

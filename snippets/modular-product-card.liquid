@@ -1,0 +1,72 @@
+{% doc %}
+  SERAVOLT Modular Product Card — renders either a live Shopify `product` object
+  or an Edition 01 architectural demo object when the store catalog is empty.
+  @param {object} [product] - Shopify Product object
+  @param {string} [demo_title] - Fallback title
+  @param {string} [demo_price] - Fallback price
+  @param {string} [demo_spec] - Fallback specification
+  @param {string} [demo_meta] - Fallback SKU/leather metadata
+  @param {string} [demo_badge] - Fallback badge text
+  @param {string} [demo_swatch] - Fallback hex leather swatch color
+  @param {string} [demo_url] - Fallback link URL
+{% enddoc %}
+
+{%- if product != blank -%}
+  {%- assign card_url = product.url -%}
+  {%- assign card_title = product.title -%}
+  {%- assign card_price = product.price | money_with_currency -%}
+  {%- assign card_badge = product.metafields.seravolt.edition_badge.value | default: product.type | default: 'EDITION 01' -%}
+  {%- assign card_meta = product.metafields.seravolt.metadata.value | default: product.selected_or_first_available_variant.sku | default: 'SERAVOLT EDITION 01' -%}
+  {%- assign card_spec = product.metafields.seravolt.specification.value | default: product.description | strip_html | truncate: 72 -%}
+  {%- assign card_swatch = product.metafields.seravolt.leather_swatch.value | default: '#141413' -%}
+{%- else -%}
+  {%- assign card_url = demo_url | default: '/collections/all' -%}
+  {%- assign card_title = demo_title -%}
+  {%- assign card_price = demo_price -%}
+  {%- assign card_badge = demo_badge | default: 'CORE CHASSIS' -%}
+  {%- assign card_meta = demo_meta -%}
+  {%- assign card_spec = demo_spec -%}
+  {%- assign card_swatch = demo_swatch | default: '#141413' -%}
+{%- endif -%}
+
+<article class="sv-product-card" data-sv-reveal>
+  <a href="{{ card_url }}" class="sv-product-card__frame">
+    <div class="sv-product-card__top">
+      <span class="sv-badge">{{ card_badge }}</span>
+      <span class="sv-mono sv-muted">{{ card_meta }}</span>
+    </div>
+
+    <div class="sv-product-card__media">
+      {%- if product != blank and product.featured_media != blank -%}
+        {{
+          product.featured_media
+          | image_url: width: 960
+          | image_tag:
+            class: 'sv-product-card__img',
+            loading: 'lazy',
+            widths: '360, 540, 720, 960',
+            sizes: '(max-width: 768px) 90vw, 45vw',
+            alt: product.featured_media.alt | default: card_title
+        }}
+      {%- else -%}
+        <div class="sv-card-silhouette" aria-hidden="true">
+          <div class="sv-card-silhouette__handle"></div>
+          <div class="sv-card-silhouette__body" style="background-color: {{ card_swatch }};">
+            <div class="sv-card-silhouette__clasp"></div>
+            <div class="sv-card-silhouette__rail"></div>
+          </div>
+        </div>
+      {%- endif -%}
+    </div>
+
+    <span class="sv-mono">{{ 'products.inspect_cta' | t }}</span>
+  </a>
+
+  <div class="sv-product-card__meta-row">
+    <h3 class="sv-product-code">
+      <a href="{{ card_url }}">{{ card_title }}</a>
+    </h3>
+    <span class="sv-mono">{{ card_price }}</span>
+  </div>
+  <p class="sv-body sv-muted">{{ card_spec }}</p>
+</article>

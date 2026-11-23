@@ -1,0 +1,46 @@
+<section class="sv-section sv-section--dark" aria-label="24-Hour Modular Architecture">
+  <div class="sv-container">
+    <div class="sv-band-header" data-sv-reveal>
+      <p class="sv-mono">{{ section.settings.left_label }}</p>
+      <p class="sv-mono sv-brass">{{ section.settings.right_label }}</p>
+    </div>
+
+    <div class="sv-modes-grid">
+      {%- if section.blocks.size > 0 -%}
+        {%- for block in section.blocks -%}
+          {%- render block -%}
+        {%- endfor -%}
+      {%- else -%}
+        <article class="sv-mode-card" data-sv-reveal>
+          <p class="sv-mono sv-mode-card__time">●  08:00 — STUDIO</p>
+          <h3 class="sv-product-code">MONOLITH TOTE</h3>
+          <p class="sv-body sv-mode-card__desc">Core chassis fitted with top handles and a padded 14-inch workstation sleeve.</p>
+        </article>
+        <article class="sv-mode-card" data-sv-reveal>
+          <p class="sv-mono sv-mode-card__time">●  13:00 — TRANSIT</p>
+          <h3 class="sv-product-code">ARCHITECTURAL CROSSBODY</h3>
+          <p class="sv-body sv-mode-card__desc">Snap on the 40mm Saddle Architect Strap and side-dock the Volt Nano Pod.</p>
+        </article>
+        <article class="sv-mode-card" data-sv-reveal>
+          <p class="sv-mono sv-mode-card__time">●  19:30 — EVENING</p>
+          <h3 class="sv-product-code">FOLIO CLUTCH</h3>
+          <p class="sv-body sv-mode-card__desc">Release the front magnetic lock rail to carry the slim Oxblood Folio solo.</p>
+        </article>
+      {%- endif -%}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "02 Modular Engineering",
+  "settings": [
+    { "type": "text", "id": "left_label", "label": "Left Mono Heading", "default": "01 / 24-HOUR MODULAR ARCHITECTURE" },
+    { "type": "text", "id": "right_label", "label": "Right Spec Label", "default": "±0.15 MM BRASS MAGNETIC DETENT TOLERANCE" }
+  ],
+  "blocks": [
+    { "type": "carry-mode-card" }
+  ],
+  "presets": [{ "name": "02 Modular Engineering" }]
+}
+{% endschema %}
